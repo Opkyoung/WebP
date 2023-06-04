@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://use.typekit.net/jlk3eov.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>
+		Making Process of Animation
+	</title>
+	<style>
+		@font-face{
+			src: url("hahmlet-light.otf");
+			font-family: "hahmlet-light";
+		}
+		@font-face{
+			src: url("hahmlet-regular.otf");
+			font-family: "hahmlet-regular";
+		}
+
+		html {scroll-behavior: smooth;}
+		body{ cursor:url(cursor.png)20 30, auto; }
+
+		html, body, header, h1, h2, h3, div, p{margin: 0; padding: 0;}
+		section{}
+		h1{}
+		h2{font-family:"hahmlet-light"; font-size: 2.4em; font-weight: lighter;}
+		p{font-family: "hahmlet-regular"; font-size:1.3em; font-weight: lighter; line-height: 1.7;letter-spacing: -0.04em}
+		nav{position: fixed;}
+		em{font-style: normal; font-weight: bold; }
+
+		.title-title{font-family: "bookmania", serif;font-weight: 300;font-style: italic; font-size: 8em; z-index: 1; position: relative; letter-spacing:-0.01em;}
+		.title-image{ position: absolute; top:3%; left: 27.5%; width:45%; z-index: 0}
+		.kor-title{font-family:"hahmlet-light"; font-size: 3.3em; font-weight: lighter; margin-top: -50px;}
+		.eng-title{font-family: "bookmania", serif;font-weight: 300;font-style: italic; font-size: 6em}
+		.eng-subtitle{font-family: "bookmania", serif;font-weight: 300;font-style: italic; font-size: 2em; background-color: black;color: white; line-height: 1; display: inline-block; padding: 3px; padding-bottom: 0px}
+		.font-white{color: white}
+		.font-black{color: black}
+		.text-center{text-align: center}
+		.text-left{text-align: left}
+		.text-right{text-align: right}
+
+
+
+		.pinkbox{width:65%; height: auto; background: #FFA4FB; border: 2px solid black;}
+		.flexbox{display: flex;position: relative; width: 100%; height: auto; flex-wrap: wrap;}
+		.flex{display: flex}
+		.unwrap{flex-wrap: nowrap;}
+		.wrap{flex-wrap: wrap}
+		.wrapper1{width: 38.4%; height: auto; background: blue; background: url(starry-night.jpg); background-attachment: fixed;background-size: 30% auto; position: relative;}
+		.star{margin: auto; height: auto; position: relative;}
+		.star img{width: 100%; height: auto; margin-top:200px}
+		.wrapper2{width: 61.6%;height:auto; background:#11ADEA;position: relative;}
+		.wrapper3{width: 61.6%;height:auto; background:#89E77C;position: relative;}
+		.wrapper4{width: 61.6%;height:auto; background:#E9FF64;position: relative;}
+		.wrapper5{width: 100%;height:auto; background:#FC8FFF;position: relative;}
+		.right-contents{width: 85%; height: auto; margin:auto; position: relative;}
+		.right-contents2{width: 90%; height: auto; margin:auto; position: relative;}
+		.scale-hover{transition: transform 0.3s ease;}
+		.scale-hover:hover {transform: scale(1.15);}
+
+		.popup {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: calc(7/13 * 100%);
+      height: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: none;
+    }
+
+
+		.sticky{position: sticky; top:10%}
+		.sticky2{position: sticky; top:5%}
+		.z1{z-index: 3}
+		.z2{z-index: 2}
+		.z3{z-index: 1}
+		.shadow{filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.5)); }
+
+		.border-bottom-white{border-bottom: 2px solid white;}
+		.border-bottom-black{border-bottom: 2px solid black;}
+
+		.margin-right{margin-right: auto;}
+		.margin-left{margin-left: auto;}
+
+		.margin-auto{margin:auto}
+		.margin-top50{margin-top: 50px}
+		.margin-top-mi20{margin-top: -20px}
+		.margin-top-mi50{margin-top: -50px}
+		.padding-top20{padding-top: 20px}
+		.padding-top30{padding-top: 30px}
+		.padding-top40{padding-top: 40px}
+		.padding-top50{padding-top: 50px}
+		.padding-top100{padding-top:100px}
+		.padding-top120{padding-top:120px}
+		.padding-top130{padding-top:130px}
+		.padding-top150{padding-top:150px}
+		.padding-top200{padding-top:200px}
+		.padding-top300{padding-top:300px}
+		.padding-top350{padding-top:350px}
+		.padding-top500{padding-top:500px}
+		.padding-top1100{padding-top:1100px}
+		.padding-top1300{padding-top:1300px}
+		.padding-top1500{padding-top:1500px}
+		.padding-top2000{padding-top:2000px}
+		.top240{top:240px}
+		.left130{left: 130px}
+		.right0{right: 0%;text-align: right;}
+		.width80{width: 80%}
+		.width100{width: 100%}
+
+		.size20{width: 20%}
+		.size40{width: 40%}
+		.size50{width: 50%}
+		.relative{position: relative;}
+		.absolute{position: absolute;}
+		.block{display: block}
+		.nobg{background-color: transparent;}
+
+
+		.popup {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: calc(8/13 * 100%);
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      border: 2px solid black;
+      display:none;
+      align-items: center;
+    }
+
+    .popup img {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+      margin: 0 auto;
+      padding: 20px;
+      box-sizing: border-box; 
+  	  padding-top: 170px}
+
+  	 .popup video {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+      margin: 0 auto;
+      padding: 20px;
+      box-sizing: border-box; 
+  	  padding-top: 170px}
+
+
+		
+	</style>
+	   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var images = document.getElementsByClassName('image');
+      var popups = document.getElementsByClassName('popup');
+
+      for (var i = 0; i < images.length; i++) {
+        images[i].addEventListener('click', createPopupToggleHandler(popups[i]));
+        popups[i].addEventListener('click', createPopupToggleHandler(popups[i]));
+      }
+
+      function createPopupToggleHandler(popup) {
+        return function() {
+          if (popup.style.display === 'none') {
+            hideAllPopups();
+            popup.style.display = 'block';
+          } else {
+            popup.style.display = 'none';
+          }
+        }
+      }
+
+      function hideAllPopups() {
+        for (var i = 0; i < popups.length; i++) {
+          popups[i].style.display = 'none';
+        }
+      }
+    });
+  </script>
+</head>
+<body>
+	<header>
+		
+	</header>
+	<section>
+		<nav>
+		<div class="nav"></div>
+		<div class="nav"></div>
+		<div class="nav"></div>
+		<div class="nav"></div>
+		</nav>
+		<div style="background: #090A0A;">
+			<div class="main-title font-white text-center ">
+				<h1 class="title-title">Animation</h1>
+				<img src="img04.png" class="title-image">
+				<br><br><br><br><br><br><br><br><br><br><br><br>
+				<h1 class="title-title">Making Process</h1>
+			</div>
+			<div class="font-white width80 margin-auto padding-top130">
+				<div class="margin-auto text-center">
+					<div class="padding-top50">
+						<p>평균 90분 남짓의 애니메이션은</p>
+						<img src="bar1.png" class="width100 padding-top20">
+					<div class="padding-top50">
+						<p>시퀀스와</p>
+						<img src="bar2.png" class="width100 padding-top20">
+						</div>
+					<div class="padding-top50">
+						<p>쇼트들로 이루어져있고</p>
+						<img src="bar3.png" class="width100 padding-top20">
+					</div>
+					</div>
+				<div class="margin-auto text-center padding-top130">
+					<img src="layers.png" class="width100">
+					<p class="absolute z1" style="top:270%; left:35%">쇼트의 1초는 총 24장의 프레임으로 구성되어있습니다.</p>
+				</div>
+				<div style="padding: 150px 0">
+					<div class="pinkbox font-black text-center margin-auto"><p style="padding: 60px 0">극장용 장편 3d애니메이션이 제작되기까지<br>걸리는 시간은 약 3년에서 5년 정도인데,<br>그동안 약 <em>128,349장</em>의 프레임이 만들어집니다.</p></div>
+				</div>
+				<div class="font-white text-center">
+					<p>그렇게 수천 수만 장의 그림들이 모여<br>단일한 이야기를 형성해나가는 모습은 마치<br>하나의 세계가 새로이 창조되는 것과 닮아있습니다.</p>
+					<div>
+						<p style="padding:130px 0">함께 ‘애니메이션’이라는 세계의 창조과정을 살펴볼까요?</p>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="flexbox">
+			<div class="wrapper1">
+				<div class="star">
+					<img src="img01.png" class="sticky z1">
+					<img src="img02.png" class="sticky z2">
+					<img src="img03.png" class="sticky z3">
+					<img src="rocket.png" style=" position: absolute; width:25%; left:10%;filter: blur(2.5px);">
+					<img src="img04.png" class="sticky z1  padding-top1100">
+				
+				</div>
+				
+			</div>
+			<div class="wrapper2">
+				<div class="right-contents">
+					<h1 class="eng-title">Development</h1>
+					<h1 class="kor-title right0">: 세계의 형성</h1>
+					<div class="flex">
+					<h2 class="font-white padding-top50"><span class="border-bottom-white">1. 세계를 구상하기</span></h2><p class="font-white" style="font-size:1rem; padding-top:80px; padding-left: 20px;">밑의 그림을 더블클릭해서 상세 이미지를 확인해보세요!</p>
+					</div>
+					<div class="flexbox">
+						 <img src="img01.png" class="image size50 margin-top-mi20 shadow scale-hover">
+						<div class="popup z1">
+							<video src="research-video.mp4" type="video/mp4" controls style="padding-top: 100px;">
+	    					</video>
+	    					<p class="font-white text-center">'Frozen 2' Research Trip</p>
+	   					</div>
+						 <p class="eng-subtitle absolute top240 left130">research</p>
+						 <p class="padding-top130">애니메이션을 만들기 앞서 애니메이션의 <br>배경이 되는 문화, 역사, 과학, 예술 등을<br>깊이 연구하고 체험을 통해 사실적인<br>세계와 매력적인 캐릭터를 구상한다.</p>	
+					</div>
+						<img src="img02.png" class="image size50 padding-top350 shadow scale-hover"  style="padding-left: 25.5%;" alt="Image">
+						<div class="popup z1">
+    						<img src="story01.jpg">
+    						<p class="font-white text-center">대본을 바탕으로 스토리 시각화</p>
+ 						</div>
+
+					<div class="relative margin-auto text-center">
+					
+						 <p class="eng-subtitle margin-top-mi50 margin-auto">story</p>
+						 <p class="text-center ">
+						 	스토리 아티스트가 감독과 협력하여 애니메이션의<br>내러티브를 
+							시각화하기 시작한다.<br>스토리 아티스트는 내러티브, 캐릭터, 세계뿐만<br>아니라 
+							영화의 전체적인 방향에 맞춰<br>감정, 표현, 타이밍, 스테이징, 프레이밍까지 고려한다.
+						 </p>
+					</div>
+					<div class="margin-auto block relative text-right">
+						<img src="img03.png" class="image size50 padding-top300 block shadow relative scale-hover margin-left"></div>
+						<div class="popup z1">
+    						<video src="visdev.mp4" type="video/mp4" controls style="padding-top: 130px;">
+	    					</video>
+	    					<p class="font-white text-center">Visual Development of 'Raya and the Last Dragon' (2021)</p>
+ 						</div>
+						 <p class="eng-subtitle margin-top-mi50 right0 text-left relative margin-left" style="float:right;">visual<br>development</p>
+						 <br> <br>
+						  <p class="right0 text-left">
+						 	프로덕션 디자인 팀이 캐릭터, 세계관,<br>
+							스토리를 생생하게 구체화한다. 이 단계에서는<br> 
+							리서치와 스토리를 통해 얻은 정보를 바탕으로 <br>
+							영화의 비주얼을 탐색하고 정립한다.
+						 </p>
+						 <br>
+						   <p class="right0 text-left">
+						 	비주얼 디벨롭 아티스트는 색감, 디자인,<br>
+							형태등을 고려하여 캐릭터와 배경을 제작하고<br>
+							스토리의 테마를 시각적으로 강화한다.
+						 </p>
+						<div class="text-center">
+							<p class="eng-subtitle nobg padding-top130" style="font-size: 3em;">More About<br>Visual Development</p>
+							<img src="img05.jpg" style="width:100%">
+							<p class="text-center eng-subtitle nobg font-black padding-top40 margin-auto " style="justify-content: center;">
+						 	Creating<br>Compelling Characters
+							</p>
+							<p class="text-center padding-top40 font-white" style="font-size:1.5rem">
+						 	“ 캐릭터는 어떻게 생겼을까? 어떤 옷을 입을까? 어디에 살고 있을까?<br>이러한 질문은 스토리의 주제를 강조하는 데 도움이 되며,<br>비주얼 디벨롭먼트는 이러한 아이디어를 실현하는 첫 번째 단계이다. ”
+							</p>
+						</div>
+						<div>
+							<h2 class="font-white padding-top150"><span class="border-bottom-white">2. 편집과 사운드</span></h2>
+							<img src="img04.png" style="width:50%" class="image shadow scale-hover">
+							<div class="popup z1">
+    						<video src="editorial.mp4" type="video/mp4" controls style="padding-top: 130px;">
+	    					</video>
+	    					<p class="font-white text-center">Editorial</p>
+ 						</div>
+							<p class="eng-subtitle margin-top-mi50 margin-auto">
+								editorial
+							</p>
+							<p class="text-left">
+						 	편집팀은 감독의 비전을 컷으로 구체화하고<br>
+							구현하는 데 도움을 준다. 적절한 리듬과<br>
+							페이스로 스토리를 전달하는 역할을 담당한다.
+						 </p>
+						 <br>
+
+							<p class="eng-subtitle margin-top-mi50 margin-auto">
+								sound
+							</p>
+							<p class="text-left" style="padding-bottom: 200px">
+						 	또한 편집자는 제작 과정 전반에 걸쳐 임시 음향<br>
+							효과와 음악 편집을 감독한다. 사운드 디자니어 및<br>
+							음악 작곡가와 협업하여 최종 포스트 프로덕션<br>과정에서 일관된 영화의 사운드를 구현한다.
+						 </p>
+
+						
+						</div>
+					</div>
+			</div>
+	
+				
+		</div>
+		
+
+		<div class="flexbox">
+			<div class="wrapper1">
+				<div class="star">
+					<img src="img06.png" class="sticky z2">
+					<img src="img08.png" class="sticky z1">
+					<img src="img15.png" style=" position: absolute; width:85%; left:40%;filter: blur(2.5px);">
+					<img src="img11.png" class="sticky z3" style="padding-top: 850px;">
+					
+				</div>
+				
+			</div>
+			<div class="wrapper3">
+				<div class="right-contents">
+					<h1 class="eng-title">Asset Creation</h1>
+					<h1 class="kor-title right0">: 세계의 구체화</h1>
+					<h2 class="font-black padding-top130"><span class="border-bottom-black padding-top50">1. 3차원의 세계로</span></h2>
+
+					<p class="eng-subtitle wrap text-left margin-top50" >keeping it<br>on track</p>
+					<div class="flexbox unwrap padding-top20">
+						
+						 <p class=" ">프로덕션 매니지먼트팀은 전체 제작 일정을<br>관리감독한다.이 팀은 영화를 제시간에 완성하기<br>위해 비주얼 개발부터 포스트 프로덕션에<br>이르기까지 모든 부서의 요구 사항을 균형 있게<br>조정하고 우선순위를 정한다.</p>	
+						  <img src="img07.png" class="size40 margin-top-mi20 scale-hover shadow image" style="margin-left: 50px; margin-top: -80px;">
+						  <div class="popup z1">
+    						<img src="product-manage.jpg">
+    					
+							</div>
+					</div>
+					 
+					<div class="relative">
+						<img src="twink1.png" class="image size20 padding-top300 block right0 relative scale-hover shadow">
+						<div class="popup z1">
+							<video src="modeling.mp4" type="video/mp4" controls style="padding-top: 100px;">
+	    					</video>
+	   					</div>
+						 <p class="eng-subtitle margin-top-mi50 margin-right">modeling</p>
+						 <br> <br>
+						  <p class="text-left">
+						 	모델링 팀은 비주얼 단계의 아름다운<br>
+							컨셉아트를 화면에서 볼 수 있는<br>복잡한 3d 캐릭터와 배경으로 변환시킨다.<br>입체감, 무게감 등을 고려하고<br>요소를 모든 각도에서 검토하여<br>최적의 디자인을 만들어낸다.
+						 </p>
+					<div class="text-right">
+						<img src="twink2.png" class="image shadow size20 padding-top50 block right0 relative scale-hover" style="margin-left: auto;">
+						<div class="popup z1">
+							<video src="rigging.mp4" type="video/mp4" controls style="padding-top: 100px;">
+	    					</video>
+	   					</div>
+						<p class="eng-subtitle margin-top-mi50 margin-auto">rigging</p>
+						   <p class="right0 text-left">
+						 	표현력이 풍부하고 역동적인<br>캐릭터를 만들기 위해 리거(rigger)는<br>애니메이터 및 모델러와 협력하여<br>다양한 방식으로 애니메이션화 할 수 있는<br>모델에 본을 심고 컨트롤러를 구축한다.
+						 </p>
+					</div>
+
+						<div class="text-center padding-top50">
+							<img src="twink3.png" class="size20 padding-top50 block relative margin-auto scale-hover shadow">
+						<p class="eng-subtitle margin-top-mi50 margin-auto">look development</p>
+						   <p class="">
+						 	룩 개발 아티스트는 최종 렌더링된 이미지에<br>표시되는 모든 요소의 컬러, 텍스처, 질감을<br>제작하여 배경과 캐릭터를 구축한다.<br><br>또한 캐릭터, 배경, 소품(옷 등)의 모델링에<br>머리카락, 바느질 자국, 바위의 갈라짐, 나뭇잎 등의<br>디테일한 요소를 추가한다.
+						 </p>
+						</div>
+						<h2 class="font-black padding-top200"><span class="border-bottom-black padding-top50">2. 영상의 기틀 마련하기</span></h2>
+						<div class="flex padding-top130">
+							<div style="width:45%" class="margin-right">
+								<img src="img09.png" style="width:25%" class=" scale-hover margin-auto block shadow">
+								<p class="eng-subtitle text-center " >layout
+								</p>
+								<p class="text-center">
+							 레이아웃 아티스트는 스토리보드를<br>바탕으로 영화의 캐릭터, 세트, 소품,<br>
+							 	 카메라의 앵글과 화면의 구도 등<br>다양한 영화적 트릭을 사용해서<br>애니메이션을 한 장면씩<br>연출하고 촬영한다.<br><br>이 단계에서 캐릭터 모델링에<br>대략적인 애니메이션을 적용한다.
+								</p>
+							<div>
+								
+							</div>
+							</div>
+							<div style="width:45%; padding-bottom: 200px" class="padding-top130; ">
+								<img src="img10.png" style="width:50%;" class=" scale-hover margin-auto block image shadow">
+								<div class="popup z1">
+    						<video src="simulation.mp4" type="video/mp4" controls style="padding-top: 20px;">
+	    					</video>
+	    					
+ 						</div>
+
+								<p class="eng-subtitle margin-top-mi50">
+									simulation
+								</p>
+								<p class="text-center" style="padding-bottom: 200px">
+							 	시뮬레이션 아티스트는 물리학을<br>기반으로 영화 속 캐릭터의 옷감, <br>머리카락, 털, 근육의 움직임을<br>예술적으로 연출하는데 사용되는<br>시뮬레이션 셋업을 제작한다.
+							 	</p>
+						 	</div>
+						</div>
+					</div>
+				</div>
+		
+					
+			</div>
+		</div>
+
+		<div class="flexbox">
+			<div class="wrapper1">
+				<div class="star">
+					<img src="img13.png" class="sticky z2">
+					<img src="img14.png" class="sticky z1">
+					<img src="img15.png" class="sticky z3" style="padding-top: 850px;">
+					
+				</div>
+				
+			</div>
+			<div class="wrapper4">
+				<div class="right-contents">
+					<h1 class="eng-title">Shot Production</h1>
+					<h1 class="kor-title right0">: 세계의 활성화</h1>
+					<h2 class="font-black padding-top130"><span class="border-bottom-black padding-top50">1. 살아 숨쉬는 세계로</span></h2>
+
+					<p class="eng-subtitle wrap text-left margin-top50" >animation&<br>technical animation</p>
+					<div class="flexbox unwrap padding-top20">
+						
+						 <p class=" ">애니메이터는 해부학에 대한 지식과<br>애니메이션의 기본 원칙을 사용하여 캐릭터와<br>배경의 움직임을 만들고 생명을 불어넣는다.<br> 
+						 테크니컬 애니메이터는 첨단 물리 시뮬레이션<br>시스템으로 캐릭터의 까다로운 의상 움직임과<br>머리카락의 움직임을 맞춤 제작한다.</p>	
+						  <img src="rocket2.png" class="margin-top-mi20 scale-hover" style="margin-left: 50px; margin-top: -80px; width: 35%;">
+					</div>
+
+					<h2 class="font-black padding-top130"><span class="border-bottom-black padding-top50">2. 섬세한 마무리</span></h2>
+					<div class="relative">
+						<img src="twink1.png" class="size20 padding-top300 block right0 relative scale-hover">
+						 <p class="eng-subtitle margin-top-mi50 margin-right">set<br>extenstion</p>
+						 <br> <br>
+						  <p class="text-left">
+						 	세트 익스텐션 아티스트는 페인팅 및 렌더링 프로그램으로<br>추가적인 배경, 풍경을 제작함으로써 애니메이션의<br>비주얼을 강화한다.이는 관객이 스토리에 완전히 몰입하고<br>세계의 일부가 된 듯한 느낌을 받도록 한다.
+						 </p>
+					<div class="text-right">
+						<img src="twink2.png" class="size20 padding-top50 block right0 relative scale-hover" style="margin-left: auto;">
+						<p class="eng-subtitle margin-top-mi50 margin-auto">lighting</p>
+						   <p class="right0 text-left">
+						 		조명 아티스트는 비주얼 디벨롭먼트 과정의<br>컬러키에 따라 반사 표면, 빛나는 요소, 극적인 광선 등의<br>효과를 만든다.이는 애니메이션의 필수 요소로 장면의 미묘하고<br>역동적인 톤과 분위기의 변화를 효과적으로 전달한다.
+						 </p>
+					</div>
+
+						<div class="text-center padding-top50">
+							<img src="twink3.png" class="size20 padding-top50 block relative margin-auto scale-hover">
+						<p class="eng-subtitle margin-top-mi50 margin-auto">crowds animation</p>
+						   <p class="">
+						 	크라우드 아티스트는 애니메이터와 협업하여<br>'군중'씬을 만들고, 수많은 캐릭터, 동물, 차량등을 구현한다.<br>이러한 군중은 대부분 캐릭터 또는 사물의 집합체로<br>샷의 주요 액션을 뒷받침한다.
+						 </p>
+
+
+
+						</div>
+			
+		
+							<div style="" class="padding-top150 ">
+								<img src="ufo2.png" style="width:30%" class=" scale-hover margin-auto block ">
+								<p class="eng-subtitle text-center " >effect
+								</p>
+								<p class="text-center">
+									이펙트 애니메이터는 불, 물, 바람 등의 요소에<br>생명을 불어넣는다. 현실의 물리법칙을 더욱<br>매력적으로 과장시킨 애니메이션의 이펙트 요소는<br>캐릭터와 사건의 감정선, 스토리텔링을 더욱 돋보이게 만든다.
+								</p>
+							<div>
+								
+							</div>
+							</div>
+							<div style="width:45%; padding-bottom: 130px" class="padding-top200; ">
+								<img src="alien.png" style="width:40%;" class=" scale-hover margin-auto block ">
+
+								<p class="eng-subtitle margin-top-mi50">
+									simulation
+								</p>
+								<p class="text-center" style="padding-bottom: 400px">
+							 	또한 편집자는 제작 과정 전반에 걸쳐<br>임시 음향
+								효과와 음악 편집을 감독한다. 사운드 디자니어 및 
+								음악 작곡가와<br>협업하여 최종 포스트 프로덕션 과정에서<br>일관된 영화의 사운드를 구현한다.
+							 	</p>
+						 	</div>
+					</div>
+				</div>
+		
+					
+			</div>
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="flexbox">
+			
+				
+			</div>
+			<div class="wrapper5">
+				<div class="right-contents2">
+					<img src="final-img.png" style="width:60%; margin-top:-250px; margin-left:-60px; " class="shadow margin-auto text-center sticky2">
+					<h1 class="eng-title right0">Post Production</h1>
+					<h1 class="kor-title right0">: 세계의 완성</h1>
+					
+
+
+					<div class="relative right0">
+		
+						  <p class="padding-top130" style="padding-bottom:230px">
+						 	포스트 프로덕션 팀은 스토리텔링 프로세스의 필수 요소로,<br>영상과 사운드를 최종적으로 전달할 때까지<br>영화를 완성합니다. 포스트 프로덕션 과정에는<br>편집, 음악 편집, 사운드, 컬러 타이밍등도 포함됩니다.
+						 </p>
+				
+
+
+
+					</div>
+			
+		
+							
+						
+					</div>
+				</div>
+		
+					
+			</div>
+	</div>
+
+
+		
+	</section>
+
+
+</body>
+</html>
